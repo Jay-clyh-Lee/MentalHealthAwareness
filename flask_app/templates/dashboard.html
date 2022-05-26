@@ -21,7 +21,9 @@
             <h6>Your username: {{logged_in_user.username}}</h6>
         </div>
         <div style="float:right" class="d-flex flex-column">
+            
             <a href="/tests/new" class="my-3 btn btn-primary text-white">Take a test</a>
+            <a href="/lovepage" class="my-3 btn btn-danger text-white">Love Page</a>
             <!-- <a href="/profile" class="my-3 btn btn-success text-white">Edit profile</a> -->
             <a href="/logout" class="col-9 my-3 btn btn-success text-white">Logout</a>
         </div>
@@ -77,7 +79,7 @@
     </div>
     <footer>
         <a href="/users" class="my-5 text-center">
-            There are currently {{all_users | count}} users participating this program.
+            There are {{all_users | count}} members joined.
         </a>
     </footer>
 </body>
