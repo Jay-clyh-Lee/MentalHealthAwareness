@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
     <title>New Test</title>
 </head>
 <body class="d-flex flex-column mx-auto">
-    <header>
-        <div class="d-flex justify-content-around align-items-center">
-            <h2 class="text-center">{{logged_in_user.first_name}}, {{logged_in_user.last_name}}</h2>
-            <div>
-                <a href="/dashboard" class="my-3 btn btn-success ">Dashboard</a>
-                <a href="/logout" class="my-3 btn btn-success ">Logout</a>
-            </div>
+    <header class="d-flex justify-content-around align-items-center">
+        <!-- <h2 class="text-center">{{logged_in_user.first_name}}  {{logged_in_user.last_name}}</h2> -->
+        <h6>username: {{logged_in_user.user_name}}</h6>
+        <div>
+            <a href="/dashboard" class="my-3 btn btn-success ">Dashboard</a>
+            <a href="/logout" class="my-3 btn btn-success ">Logout</a>
         </div>
     </header>
     <form action="/tests/create" method="post" class="mx-auto bg-light rounded p-5  ">
@@ -34,6 +34,7 @@
         </div> -->
 
         <!-- conditions = ["hopelessness", "negative_thoughts", "cognitive_problems", "focus_problems", "restlessness", "poor_appetite", "worthlessness", "fatigue", "sleep_problems", "loss_of_interest" ] -->
+        <p>How often does the following symptoms happen <text id="red" class="text-danger">every week</text>?</p>
         <div class="d-flex">
             <div id="left-panel">
                 <div class="d-flex flex-column mx-6">
@@ -118,6 +119,5 @@
                 </div>
                 <input type="submit" value="Submit Result" class="my-3 btn btn-primary ">
         </div>
-        
     </form>
 </body>

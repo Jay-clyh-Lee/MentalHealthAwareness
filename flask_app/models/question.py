@@ -49,7 +49,7 @@ class Question:
 
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO questions (question, user_id) VALUES (%(question)s, %(user_id)s;"
+        query = "INSERT INTO questions (question, user_id) VALUES (%(question)s, %(user_id)s);"
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod

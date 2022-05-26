@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Users</title>
+    <style>
+        p {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column mx-auto">
+    <header class="d-flex justify-content-around align-items-center mb-5">
+        <!-- <div class="d-flex justify-content-around align-items-center">
+            <h2 class="text-center">{{logged_in_user.first_name}}  {{logged_in_user.last_name}}</h2>
+        </div> --> 
+        <h6>username: {{logged_in_user.user_name}}</h6>
+        <div>
+            <a href="/dashboard" class="my-3 btn btn-success ">Dashboard</a>
+            <a href="/logout" class="my-3 btn btn-success ">Logout</a>
+        </div>
+    </header>
+    <h4>All users:</h4>
+    <div class="d-flex">
+    <main>
+        <table>
+            <thead>
+                <th>username</th>
+                <th>joined on</th>
+                <th>number of tests taken</th>
+            </thead>
+            {% for user in all_users %}
+                <tbody>
+                    <td>{{user.username}}</td>
+                    <td>{{user.created_at}}</td>
+                    <td>{{user.tests.id | count}}</td>
+                </tbody>
+            {% endfor %}
+        </table>
+    </main>
+</body>
+</html>
+
+

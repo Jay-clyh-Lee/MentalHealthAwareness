@@ -9,34 +9,37 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>Test Result</title>
     <style>
-        h4 {
+        h5 {
             padding: .5em;
         }
     </style>
 </head>
 <body class="d-flex flex-column mx-auto">
-    <header>
-        <div class="d-flex justify-content-around align-items-center">
-            <h2 class="text-center">Test taker: {{logged_in_user.first_name}}, {{logged_in_user.last_name}}</h2>
-        </div>
-        <div style="float:right" class="d-flex flex-column">
+    <header class="d-flex justify-content-around align-items-center mb-5">
+        <!-- <h2 class="text-center">{{logged_in_user.first_name}}  {{logged_in_user.last_name}}</h2> -->
+        <h6>username: {{logged_in_user.user_name}}</h6>
+        <div>
             <a href="/dashboard" class="my-3 btn btn-success ">Dashboard</a>
-            <a href="/logout" class="col-9 my-3 btn btn-success ">Logout</a>
+            <a href="/logout" class="my-3 btn btn-success ">Logout</a>
         </div>
     </header>
-    <main>
+    <main class="mt-3">
+        <div class="list-group">
         <h1>This test was taken on: {{test.created_at.strftime('%B %d %Y')}}</h1>
-        <h4>Feeling hopeless: {{test.hopelessness}}</h4>
-        <h4>Negative or suicidal thoughts: {{test.negative_thoughts}}</h4>
-        <h4>Cognitive problems: {{test.cognitive_problems}}</h4>
-        <h4>Having a hard time to concentrate or focus: {{test.focus_problems}}</h4>
-        <h4>Feeling restless that it is hard to sit still: {{test.restlessness}}</h4>
-        <h4>Poor appetite, eat too much or too little: {{test.poor_appetite}}</h4>
-        <h4>Feeling worthless: {{test.worthlessness}}</h4>
-        <h4>Fatigue, low energy: {{test.fatigue}}</h4>
-        <h4>Sleep problems: {{test.sleep_problems}}</h4>
-        <h4>Loss of interest or pleasure in favorite activities: {{test.loss_of_interest}}</h4>
-        <h3>Score: {{test.result}}</h3>
-        <h3>Level: {{level}}</h3>
+        <h5 class="list-group-item">Feeling hopeless: {{test.hopelessness}}</h5>
+        <h5 class="list-group-item">Negative or suicidal thoughts: {{test.negative_thoughts}}</h5>
+        <h5 class="list-group-item">Cognitive problems: {{test.cognitive_problems}}</h5>
+        <h5 class="list-group-item">Having a hard time to concentrate or focus: {{test.focus_problems}}</h5>
+        <h5 class="list-group-item">Feeling restless that it is hard to sit still: {{test.restlessness}}</h5>
+        <h5 class="list-group-item">Poor appetite, eat too much or too little: {{test.poor_appetite}}</h5>
+        <h5 class="list-group-item">Feeling worthless: {{test.worthlessness}}</h5>
+        <h5 class="list-group-item">Fatigue, low energy: {{test.fatigue}}</h5>
+        <h5 class="list-group-item">Sleep problems: {{test.sleep_problems}}</h5>
+        <h5 class="list-group-item">Loss of interest or pleasure in favorite activities: {{test.loss_of_interest}}</h5>
+        </div>
+        <div class="border text-center">
+        <h3><u></u>Score: {{test.result}}</u></h3>
+        <h3><u>Level: {{level}}</u></h3>
+        </div>
     </main>
 </body>

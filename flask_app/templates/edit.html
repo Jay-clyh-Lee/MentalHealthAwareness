@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>question</title>
+    <title>Edit Question</title>
 </head>
 <body class="d-flex flex-column mx-auto">
-    <header>
-        <div class="d-flex justify-content-around align-items-center">
-            <h2 class="text-center">{{logged_in_user.first_name}}, {{logged_in_user.last_name}}</h2>
-        </div>
-        <div style="float:right" class="d-flex flex-column">
+    <header class="d-flex justify-content-around align-items-center">
+        <!-- <div class="d-flex justify-content-around align-items-center">
+            <h2 class="text-center">{{logged_in_user.first_name}}  {{logged_in_user.last_name}}</h2>
+        </div> --> 
+        <h6>username: {{logged_in_user.user_name}}</h6>
+        <div>
             <a href="/dashboard" class="my-3 btn btn-success ">Dashboard</a>
-            <a href="/logout" class="col-9 my-3 btn btn-success ">Logout</a>
+            <a href="/logout" class="my-3 btn btn-success ">Logout</a>
         </div>
     </header>
     <form action="/questions/update/{{question.id}}" method="post" class="mx-auto bg-light rounded p-5">
@@ -32,6 +33,10 @@
                 {% endif %}
             {% endwith %}
         </div>
+        <div class="mx-5">
+            <p> This question was created on: {{question.created_at.strftime('%m/%d/%Y')}}</p>
+            <p> This question was updated on: {{question.updated_at.strftime('%m/%d/%Y')}}</p>
+        </div>
         <div class="d-flex">
             <div class="d-flex flex-column mx-5">
                 <label for="question">
@@ -41,4 +46,5 @@
             </div>
         </div>
     </form>
+    <a class="btn btn-danger" href="/questions/delete/{{question.id}}">Delete this question</a>
 </body>

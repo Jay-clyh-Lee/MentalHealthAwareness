@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Profile</title>
+    <title>Dashboard</title>
     <style>
         p {
             font-weight: bold;
@@ -17,15 +17,15 @@
 <body class="d-flex flex-column mx-auto">
     <header>
         <div class="d-flex justify-content-around align-items-center">
-            <h2 class="text-center">Welcome, {{logged_in_user.first_name}}, {{logged_in_user.last_name}}</h2>
+            <h2 class="text-center">Welcome, {{logged_in_user.first_name}}  {{logged_in_user.last_name}}</h2>
+            <h6>Your username: {{logged_in_user.user_name}}</h6>
         </div>
         <div style="float:right" class="d-flex flex-column">
             <a href="/tests/new" class="my-3 btn btn-primary text-white">Take a test</a>
             <!-- <a href="/profile" class="my-3 btn btn-success text-white">Edit profile</a> -->
-            <a href="/logout" class="col-9 my-3 btn btn-warning text-white">Logout</a>
+            <a href="/logout" class="col-9 my-3 btn btn-success text-white">Logout</a>
         </div>
     </header>
-    <h4>Past Tests:</h4>
     <div class="d-flex">
         <main class="mt-10 col-5 border border-2 border-dark">
             {% for test in all_tests %}
@@ -60,12 +60,10 @@
             <p class="mx-5">Ask a question or leave a comment:</p>
             <form action="/questions/create" method="post" id="question" class="mx-5 d-flex flex-column">
                 <label for="question">
-                    <!-- <input type="text" name="question" cols="44" rows="9"> -->
-                    <!-- value="Submit" class="btn btn-success col-5 text-center" -->
+                    <textarea name="question" form="question" cols="44" rows="9" wrap="soft"></textarea>
+                    <input type="submit" value="Submit" class="btn btn-primary col-5 text-center">
                 </label>
-                <input type="submit">
             </form>
-            <textarea name="question" form="question" cols="44" rows="9" wrap="soft"></textarea>
         </div>
         <div class="mt-10 col-5 border border-2 border-dark">
             {% for question in all_questions %}
@@ -73,13 +71,17 @@
                     <div>
                         {% if logged_in_user.id == question.user_id %}
                             <a href="/questions/edit/{{question.id}}">{{question.created_at.strftime('%m/%d/%Y')}}</a>
-                            <a class="btn btn-primary" href="/questions/delete/{{question.id}}">Delete</a>
                         {% endif %}
                     </div>
                 </div>
             {% endfor %}
-        </div>   
+        </div>
     </div>
+    <footer>
+        <a href="/users" class="my-5 text-center">
+            There are currently {{users | count}} users participating this program.
+        </a>
+    </footer>
 </body>
 </html>
 

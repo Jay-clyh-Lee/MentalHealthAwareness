@@ -11,6 +11,7 @@ class User:
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.age = data["age"]
+        self.username = data['username']
         self.email = data['email']
         self.password = data['password']
         self.created_at = data['created_at']
@@ -19,7 +20,7 @@ class User:
 
     @classmethod
     def create_user(cls, data):
-        query = "INSERT INTO users (first_name, last_name, age, email, password) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s);"
+        query = "INSERT INTO users (first_name, last_name, age, username, email, password) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(username)s, %(email)s, %(password)s);"
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
@@ -57,6 +58,15 @@ class User:
             is_valid=False
         if len(data['last_name']) < 1:
             flash("Last name must be at least 1 character", "register")
+            is_valid=False
+        # for username
+        if len(data['username']) < 4:
+            flash("username must be at least 4 character", "register")
+            is_valid=False
+        query = "SELECT * FROM users WHERE username = %(username)s;"
+        results = connectToMySQL(User.db).query_db(query, data)
+        if len(results) >= 1:
+            flash("username already taken, try a different one.", "register")
             is_valid=False
         # for age
         if int(data['age']) < 18:
