@@ -105,7 +105,6 @@ class Test:
         query = "DELETE FROM tests WHERE id = %(id)s;"
         return connectToMySQL(cls.db).query_db(query,data)
 
-
     # Static
     # not needed since users must choose 1 out of 3 options for each condition
     @staticmethod

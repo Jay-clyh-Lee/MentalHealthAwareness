@@ -14,12 +14,10 @@
         }
     </style>
 </head>
-
 <body class="d-flex flex-column mx-auto">
     <header>
-        <div class="d-flex justify-content-between align-items-center">
-            <h1>Profile</h1>
-            <h2 class="text-center">{{logged_in_user.first_name}}, {{logged_in_user.last_name}}</h2>
+        <div class="d-flex justify-content-around align-items-center">
+            <h2 class="text-center">Welcome, {{logged_in_user.first_name}}, {{logged_in_user.last_name}}</h2>
         </div>
         <div style="float:right" class="d-flex flex-column">
             <a href="/tests/new" class="my-3 btn btn-primary text-white">Take a test</a>
@@ -28,33 +26,60 @@
         </div>
     </header>
     <h4>Past Tests:</h4>
-    <main class="mt-10 col-5 border border-2 border-dark">
-        {% for test in all_tests %}
-            <div style="overflow:auto" class="d-flex justify-content-between align-items-center border-bottom border-3 border-dark p-3">
-                <div>
-                    <p>Test score: {{test.result}}</p>
-                    <p>Taken on: {{test.created_at.strftime('%m/%d/%Y')}}</p>
-                    <!-- below would be for doctor/admin only
-                    A patient/user should not be able to see others' test results -->
-                    <!-- <p>Test Taker: {{test.user.first_name}} {{test.user.last_name}}</p> -->
-                </div>
-                <div>
-                    <a class="btn btn-primary" href="/tests/show/{{test.id}}">View</a>
-                </div>
-                
-                <!--If user is a doctor or admin: -->
-                <!--
-                <div>
-                    {% if logged_in_user.id == test.user.id %}
-                        <a class="btn btn-primary" href="/tests/edit/{{test.id}}">Edit</a>
-                        <a class="btn btn-primary" href="/tests/delete/{{test.id}}">Delete</a>
-                    {% else %}
+    <div class="d-flex">
+        <main class="mt-10 col-5 border border-2 border-dark">
+            {% for test in all_tests %}
+                {% if logged_in_user.id == test.user_id %}
+                <div style="overflow:auto" class="d-flex justify-content-between align-items-center border-bottom border-3 border-dark p-3">
+                    <div>
+                        <p>Test score: {{test.result}}</p>
+                        <p>Taken on: {{test.created_at.strftime('%m/%d/%Y')}}</p>
+                        <!-- below would be for doctor/admin only
+                        A patient/user should not be able to see others' test results -->
+                        <!-- <p>Test Taker: {{test.user.first_name}} {{test.user.last_name}}</p> -->
+                    </div>
+                    <div>
                         <a class="btn btn-primary" href="/tests/show/{{test.id}}">View</a>
-                    {% endif %}
-                </div> -->
-            </div>
-        {% endfor %}
-    </main>
+                    </div>
+                    
+                    <!--If user is a doctor or admin: -->
+                    <!--
+                    <div>
+                        {% if logged_in_user.id == test.user.id %}
+                            <a class="btn btn-primary" href="/tests/edit/{{test.id}}">Edit</a>
+                            <a class="btn btn-primary" href="/tests/delete/{{test.id}}">Delete</a>
+                        {% else %}
+                            <a class="btn btn-primary" href="/tests/show/{{test.id}}">View</a>
+                        {% endif %}
+                    </div> -->
+                </div>
+                {% endif %}
+            {% endfor %}
+        </main>
+        <div class="d-flex flex-column mx-5">
+            <p class="mx-5">Ask a question or leave a comment:</p>
+            <form action="/questions/create" method="post" id="question" class="mx-5 d-flex flex-column">
+                <label for="question">
+                    <!-- <input type="text" name="question" cols="44" rows="9"> -->
+                    <!-- value="Submit" class="btn btn-success col-5 text-center" -->
+                </label>
+                <input type="submit">
+            </form>
+            <textarea name="question" form="question" cols="44" rows="9" wrap="soft"></textarea>
+        </div>
+        <div class="mt-10 col-5 border border-2 border-dark">
+            {% for question in all_questions %}
+                <div style="overflow:auto" class="d-flex justify-content-between align-items-center border-bottom border-1 p-3">
+                    <div>
+                        {% if logged_in_user.id == question.user_id %}
+                            <a href="/questions/edit/{{question.id}}">{{question.created_at.strftime('%m/%d/%Y')}}</a>
+                            <a class="btn btn-primary" href="/questions/delete/{{question.id}}">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>   
+    </div>
 </body>
 </html>
 

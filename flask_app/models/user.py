@@ -47,7 +47,6 @@ class User:
             return False
         return cls(results[0])
 
-
     # VALIDATION
     @staticmethod
     def validate_registration(data):
