@@ -53,7 +53,7 @@ def show(test_id):
     data = {                                                           
         "id": test_id,
     }
-    return render_template("show.html", logged_in_user = user.User.get_by_id(user_data), test = test.Test.get_by_test_id(data))
+    return render_template("results.html", logged_in_user = user.User.get_by_id(user_data), test = test.Test.get_by_test_id(data))
 
 # admin only (do not use for now)
 @app.route('/tests/edit/<int:test_id>')
