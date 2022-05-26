@@ -24,7 +24,7 @@ def create():
         data[key] = int(data[key])
 
     # calculate severity (add scores)
-    test_result = sum(int(x) for x in data.values())
+    test_result = sum(int(x) for x in data.values()) - data["user_id"]
     data["result"] = test_result
 
     # display level of severity based on test score
