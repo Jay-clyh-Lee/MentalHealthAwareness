@@ -23,6 +23,7 @@ class Test:
         self.loss_of_interest = data["loss_of_interest"]
         # test score (sum of condition levels)
         self.result = data['result']
+        self.level = data['level']
         # other
         self.created_at = data['created_at']
         # test cannot be updated, only retakes
@@ -32,7 +33,7 @@ class Test:
 
     @classmethod
     def create_test(cls, data):
-        query = "INSERT INTO tests (hopelessness, negative_thoughts, cognitive_problems, focus_problems, restlessness, poor_appetite, worthlessness, fatigue, sleep_problems, loss_of_interest, result, user_id) VALUES (%(hopelessness)s, %(negative_thoughts)s, %(cognitive_problems)s, %(focus_problems)s, %(restlessness)s, %(poor_appetite)s, %(worthlessness)s, %(fatigue)s, %(sleep_problems)s, %(loss_of_interest)s, %(result)s, %(user_id)s);"
+        query = "INSERT INTO tests (hopelessness, negative_thoughts, cognitive_problems, focus_problems, restlessness, poor_appetite, worthlessness, fatigue, sleep_problems, loss_of_interest, result, level, user_id) VALUES (%(hopelessness)s, %(negative_thoughts)s, %(cognitive_problems)s, %(focus_problems)s, %(restlessness)s, %(poor_appetite)s, %(worthlessness)s, %(fatigue)s, %(sleep_problems)s, %(loss_of_interest)s, %(result)s, %(level)s, %(user_id)s);"
         return connectToMySQL(cls.db).query_db(query, data)
         
     @classmethod
@@ -60,6 +61,7 @@ class Test:
                 'first_name': row['first_name'],
                 'last_name': row['last_name'],
                 'age': row['age'],
+                'username': row['username'],
                 'email': row['email'],  
                 'password': row['password'],
                 'created_at': row['users.created_at'],
@@ -79,6 +81,8 @@ class Test:
                 'id': row['users.id'],
                 'first_name': row['first_name'],
                 'last_name': row['last_name'],
+                'age': row['age'],
+                'username': row['username'],
                 'email': row['email'],  
                 'password': row['password'],
                 'created_at': row['users.created_at'],

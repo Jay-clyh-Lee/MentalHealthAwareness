@@ -56,3 +56,12 @@ def dashboard():
         "id": session["user_id"]
     }
     return render_template("dashboard.html", logged_in_user = user.User.get_by_id(data), all_tests = test.Test.get_tests_by_user_id(data), all_questions = question.Question.get_questions_by_user_id(data), all_users = user.User.get_all())
+
+@app.route('/users')
+def view_users():
+    if "user_id" not in session:
+        return redirect('/')
+    data = {
+        "id": session["user_id"]
+    }
+    return render_template("users.html", logged_in_user = user.User.get_by_id(data), all_users = user.User.get_all(), all_tests = test.Test.get_tests_by_user_id(data), all_questions = question.Question.get_questions_by_user_id(data))

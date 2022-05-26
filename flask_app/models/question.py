@@ -8,7 +8,9 @@ class Question:
     def __init__(self, data):
         # id
         self.id = data['id']
-        self.question = data['question']
+        self.comment = data['comment']
+        self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
         self.user_id = data['user_id']
 
     @classmethod
@@ -27,6 +29,7 @@ class Question:
                 'first_name': row['first_name'],
                 'last_name': row['last_name'],
                 'age': row['age'],
+                'username': row['username'],
                 'email': row['email'],  
                 'password': row['password'],
                 'created_at': row['users.created_at'],
@@ -39,34 +42,31 @@ class Question:
     def get_questions_by_user_id(cls, data):
         query = "SELECT * FROM questions LEFT JOIN users ON users.id = questions.user_id WHERE users.id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
-        # print(results, '1232132112321312321')
-        # if len(results) == 0:
-        #     return False
         my_questions = []
         for row in results:
             my_questions.append(cls(row))
         return my_questions
 
     @classmethod
-    def save(cls, data):
-        query = "INSERT INTO questions (question, user_id) VALUES (%(question)s, %(user_id)s);"
+    def create_question(cls, data):
+        query = "INSERT INTO questions (comment, user_id) VALUES (%(comment)s, %(user_id)s);"
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
-    def update(cls, data):
-        query = "UPDATE questions SET question=%(question)s, user_id=%(user_id)s WHERE id=%(id)s;"
+    def update_question(cls, data):
+        query = "UPDATE questions SET comment=%(comment)s, user_id=%(user_id)s WHERE questions.id=%(id)s;"
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
-    def destroy(cls, data):
+    def destroy_question(cls, data):
         query = "DELETE FROM questions WHERE id=%(id)s;"
         return connectToMySQL(cls.db).query_db(query, data)
 
     # validate length
     @staticmethod
-    def validate(data):
+    def validate_question(data):
         is_valid = True
-        if len(data["question"]) < 50:
-            flash("There needs to be at least 50 characters", "question")
+        if len(data["comment"]) < 10:
+            flash("There needs to be at least 10 characters", "question")
             is_valid = False
         return is_valid

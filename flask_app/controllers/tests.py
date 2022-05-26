@@ -28,14 +28,13 @@ def create():
     data["result"] = test_result
 
     # display level of severity based on test score
-    if test_result < 10:
+    if test_result < 11:
         level = "mild"
-    elif test_result >= 10 and test_result < 20:
+    elif test_result >= 11 and test_result < 20:
         level = "moderate"
     else:
         level = "severe"
-    session["level"] = level
-
+    data["level"] = level
     print("##############   TEST ON DATA   #############", data)
 
     # validation not needed. restricted form data input
@@ -46,7 +45,6 @@ def create():
     # return redirect(f'/tests/results/{test_id}')
     return redirect('/dashboard')
 
-
 @app.route('/tests/show/<int:test_id>')
 def show(test_id):
     user_data = {
@@ -55,7 +53,7 @@ def show(test_id):
     data = {                                                           
         "id": test_id,
     }
-    return render_template("show.html", logged_in_user = user.User.get_by_id(user_data), test = test.Test.get_by_test_id(data), level = session["level"])
+    return render_template("show.html", logged_in_user = user.User.get_by_id(user_data), test = test.Test.get_by_test_id(data))
 
 # admin only (do not use for now)
 @app.route('/tests/edit/<int:test_id>')

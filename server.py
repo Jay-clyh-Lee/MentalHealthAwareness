@@ -1,5 +1,5 @@
 from flask_app import app
-from flask_app.controllers import users, tests
+from flask_app.controllers import users, tests, questions
 import os
 
 if __name__ == '__main__':

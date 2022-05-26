@@ -17,7 +17,7 @@
 <body class="d-flex flex-column mx-auto">
     <header class="d-flex justify-content-around align-items-center mb-5">
         <!-- <h2 class="text-center">{{logged_in_user.first_name}}  {{logged_in_user.last_name}}</h2> -->
-        <h6>username: {{logged_in_user.user_name}}</h6>
+        <h6>username: {{logged_in_user.username}}</h6>
         <div>
             <a href="/dashboard" class="my-3 btn btn-success ">Dashboard</a>
             <a href="/logout" class="my-3 btn btn-success ">Logout</a>
@@ -39,7 +39,7 @@
         </div>
         <div class="border text-center">
         <h3><u></u>Score: {{test.result}}</u></h3>
-        <h3><u>Level: {{level}}</u></h3>
+        <h3><u>Level: {{test.level}}</u></h3>
         </div>
     </main>
 </body>

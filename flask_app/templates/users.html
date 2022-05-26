@@ -19,7 +19,7 @@
         <!-- <div class="d-flex justify-content-around align-items-center">
             <h2 class="text-center">{{logged_in_user.first_name}}  {{logged_in_user.last_name}}</h2>
         </div> --> 
-        <h6>username: {{logged_in_user.user_name}}</h6>
+        <h6>username: {{logged_in_user.username}}</h6>
         <div>
             <a href="/dashboard" class="my-3 btn btn-success ">Dashboard</a>
             <a href="/logout" class="my-3 btn btn-success ">Logout</a>
@@ -30,15 +30,13 @@
     <main>
         <table>
             <thead>
-                <th>username</th>
-                <th>joined on</th>
-                <th>number of tests taken</th>
+                <th>username |</th> 
+                <th> joined on</th>
             </thead>
             {% for user in all_users %}
                 <tbody>
                     <td>{{user.username}}</td>
                     <td>{{user.created_at}}</td>
-                    <td>{{user.tests.id | count}}</td>
                 </tbody>
             {% endfor %}
         </table>

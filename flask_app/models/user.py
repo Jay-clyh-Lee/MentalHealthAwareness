@@ -25,7 +25,7 @@ class User:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM users LEFT JOIN tests ON tests.user_id = id;"
+        query = "SELECT * FROM users LEFT JOIN tests ON tests.user_id = users.id;"
         results = connectToMySQL(cls.db).query_db(query) 
         users = []
         for u in results:
@@ -71,6 +71,9 @@ class User:
         # for age
         if int(data['age']) < 18:
             flash("Age cannot be less than 18", "register")
+            is_valid=False
+        if int(data["age"]) > 125:
+            flash("Age cannot be more than 125", "register")
             is_valid=False
         # for email
         if not EMAIL_REGEX.match(data['email']):
